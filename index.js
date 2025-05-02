@@ -22,7 +22,7 @@ const User = mongoose.model('User', userSchema);
 // API Routes
 
 // Create new user
-app.post('/users', async (req, res) => {
+app.post('/add_users', async (req, res) => {
   try {
     const { userId, userName, userPhoneNumber } = req.body;
     const newUser = new User({ userId, userName, userPhoneNumber });
@@ -34,7 +34,7 @@ app.post('/users', async (req, res) => {
 });
 
 // Get all users
-app.get('/users', async (req, res) => {
+app.get('/get_users', async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
