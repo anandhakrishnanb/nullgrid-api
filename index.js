@@ -15,6 +15,9 @@ const userSchema = new mongoose.Schema({
   userId: String,
   userName: String,
   userPhoneNumber: String,
+},{versionKey: String,
+
+
 });
 
 const User = mongoose.model('User', userSchema);
