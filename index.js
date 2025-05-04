@@ -12,13 +12,12 @@ mongoose.connect(process.env.MONGO_URL)
 
 // Define User Schema and Model
 const userSchema = new mongoose.Schema({
-  userId: String,
-  userName: String,
-  userPhoneNumber: String,
-},{versionKey: String,
+    userId: String,
+    userName: String,
+    userPhoneNumber: String,
+  }, { versionKey: false });
+  
 
-
-});
 
 const User = mongoose.model('User', userSchema);
 
