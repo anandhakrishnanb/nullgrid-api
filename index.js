@@ -58,6 +58,27 @@ app.get('/get_users', async (req, res) => {
     }
   });
 
+// Delete user by name
+app.delete('/delete_user/:name', async (req, res) => {
+  try {
+    const { name } = req.params;
+    const deletedUser = await User.findOneAndDelete({ name });
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: '❌ User not found' });
+    }
+
+    res.status(200).json({
+      message: `✅ User '${name}' deleted successfully`,
+      deletedUser
+    });
+  } catch (err) {
+    console.error('Error deleting user:', err);
+    res.status(500).json({ message: '❌ Error deleting user', error: err.message });
+  }
+});
+
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
