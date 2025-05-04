@@ -12,12 +12,11 @@ mongoose.connect(process.env.MONGO_URL)
 
 // Define User Schema and Model
 const userSchema = new mongoose.Schema({
-    userId: String,
-    userName: String,
-    userPhoneNumber: String,
+    id: String,
+    name: String,
+    phone_number: String,
   }, { versionKey: false });
   
-
 
 const User = mongoose.model('User', userSchema);
 
@@ -26,13 +25,13 @@ const User = mongoose.model('User', userSchema);
 // Create new user
 app.post('/add_users', async (req, res) => {
   try {
-    const { userId, userName, userPhoneNumber } = req.body;
-    const existingUser = await User.findOne({ userName });
+    const { id, name, phone_number } = req.body;
+    const existingUser = await User.findOne({ name });
     if (existingUser) {
       return res.status(400).json({ message: '❌ Username already exists' });
     }
 
-    const newUser = new User({ userId, userName, userPhoneNumber });
+    const newUser = new User({ id, name, phone_number });
     await newUser.save();
 
     res.status(201).json({
